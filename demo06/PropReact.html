@@ -1,0 +1,43 @@
+<html>
+    <head>
+      <script src="../build/react.js"></script>
+      <script src="../build/react-dom.js"></script>
+      <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+      <div class="" id="dd">
+
+      </div>
+         <script type="text/babel">
+        var Holl=    React.createClass({
+           propTypes:{
+             title:React.PropTypes.string.isRequired,
+             id:React.PropTypes.string.isRequired,
+           },
+
+         render:function(){
+              return (<ol>
+              {
+                React.Children.map(this.props.children,function(child){
+                return <li>{child}</li>
+                })
+              }</ol>);
+            }
+
+         })
+         ReactDOM.render(
+<Holl title="asd" some="asd">
+<span title="hao a " id="123">sm thing </span>
+<span title="hao a ">sm thing </span>
+<span title="hao a ">sm thing </span>
+<span title="hao a ">sm thing </span>
+<span title="hao a ">sm thing </span>
+<span title="hao a ">sm thing </span>
+
+</Holl>
+           ,document.getElementById('dd'))
+
+         </script>
+
+    </body>
+</html>

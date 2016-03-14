@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+/**
+*   
+*/
+<body>
+    <div id="e">asdasdasd</div>
+    <script type="text/babel">
+        var Hol=React.createClass({
+            render:function () {
+                return (
+                	<ol>
+                		{React.Children.map(this.props.children,function(child){
+                			return <li>{child}</li>
+                		})}
+                	</ol>
+                );
+            }
+        });
+        ReactDOM.render(<Hol>
+<span>show me your tits</span><span>not realictive</span>
+        	</Hol>,document.getElementById("e"))
+    </script>
+    
+</body>
+
+</html>

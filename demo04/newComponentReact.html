@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <script src="./../build/react.js">
+    </script>
+    <script src="./../build/react-dom.js">
+    </script>
+    <script src="./../build/browser.min.js">
+    </script>
+</head>
+
+<body>
+    <div id="example">
+        fsadf</div>
+    <script type="text/babel">
+        var arr=["<input type='text'> shuo shei ne ?" , "<input type='checkbox'>meiyou le" ]; 
+        ReactDOM.render(
+        <div>{arr}</div>, document.getElementById("example"));
+    </script>
+
+    <div id="e2"></div>
+     <script type="text/babel">
+     	var Hello=React.createClass({
+     		render :function () {
+     				return  <input type="checkbox">{this.props.name}</input>
+     		}
+     	});
+
+     	ReactDOM.render(
+     		<Hello name="sm wan yi "/>
+     		,
+     		document.getElementById("e2"));
+     </script>
+</body>
+
+</html>

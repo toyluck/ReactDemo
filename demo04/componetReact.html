@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <script src="./../build/react.js">
+            
+        </script>
+        <script src="./../build/react-dom.js">
+            
+        </script>
+        <script src="./../build/browser.min.js">
+            
+        </script>
+    </head>
+    
+    
+   <body>
+        <div id="example">
+            asdf
+        </div>
+        
+        <!--React 中 render （参数1，参数2） 后面不能跟符号-->
+        <script type="text/babel">
+            var Hellos=React.createClass({
+            render:function(){
+            return <h2>nihao? {this.props.id}+={this.props.className}</h2>
+            }
+            });
+            
+            ReactDOM.render(
+            <Hellos name="asd1234" id="asdasd" className="smwy"
+            
+            />,
+            document.getElementById("example")
+            );
+        </script>
+   </body>
+</html>
