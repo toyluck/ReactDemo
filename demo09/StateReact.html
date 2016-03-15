@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="ex"></div>
+    <script type="text/babel">
+        var FormData=React.createClass({
+            getInitialState:function () {
+                return ({value:'大家好啊!'});
+            },
+//            点击事件
+            hanlderChange:function (event) {
+              this.setState({value:event.target.value})
+            },
+            render : function () {
+                return (
+                    <div>
+                        <input type="text" value={this.state.value} onChange={this.hanlderChange} />
+                        <p>{this.state.value}</p>
+                    </div>
+                 );
+            },
+
+
+        });
+        ReactDOM.render(<FormData/>,document.getElementById('ex'));
+    </script>
+</body>
+</html>

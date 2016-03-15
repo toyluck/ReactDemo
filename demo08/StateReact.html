@@ -1,0 +1,31 @@
+<html>
+
+<head>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+</head>
+<body>
+	<div id="ex"></div>
+	<script type="text/babel">
+		var Myswich=React.createClass({
+			getInitialState:function() {
+			    return {
+			        liked:false
+			    }
+			},
+			toggleLike:function(event) {
+				// return this.state.liked:!this.state.liked;
+				this.setState({liked:!this.state.liked});
+			},
+			render:function(){
+				var text =this.state.liked?'like':'don\'t like ';
+				return (
+		<span onClick={this.toggleLike}>{text} sm ren a ?</span>
+					);
+			}
+		});
+		ReactDOM.render(<Myswich />,document.getElementById('ex'))
+	</script>
+</body>
+</html>
