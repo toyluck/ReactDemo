@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+
+  <body>
+    <div class="" id="ex">
+
+    </div>
+      <script type="text/babel">
+        var MyRef=React.createClass({
+          toFucos:function(){
+            this.refs.myDom.focus();
+          },
+
+        render:function(){
+          return (<div>
+              <input type="text" ref="myDom"/>
+            <input type="button" onClick={this.toFucos} value="玩意什么"/>
+            </div>);
+        }
+        });
+          //在React中 不能给body替换给多个 控件,否则会报错
+          // ReactDOM.render(<MyRef />, document.body);
+          ReactDOM.render(<MyRef />, document.getElementById('ex'));
+
+      </script>
+  </body>
+</html>
