@@ -1,0 +1,42 @@
+<html>
+	  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+
+  <body>
+  	<div id="ex"></div>
+  	<script type="text/babel">
+  	var Hell=React.createClass({
+  		getInitialState() {
+  		    return {
+  		    	// shezhi ke jian du 
+  		        opacity:1.0
+  		    };
+  		},
+  		//lifecycle  once and only in client 
+  		componentDidMount:function(){
+			this.timer=setInterval(function(){
+  			var opacity=this.state.opacity;
+			opacity-=0.05;
+			if (opacity<0.1) {
+				opacity=1;
+			}
+			this.setState({opacity:opacity})			
+			}.bind(this),100)  			
+  		},
+  		render:function() {
+  			return (
+  				<div  style={{opacity:this.state.opacity}}>
+  				Hello {this.props.name}
+  				</div>
+  			);
+  		}
+
+  	});
+  	ReactDOM.render(
+  		<Hell  name="go !"/>,document.getElementById('ex'));
+  	</script>
+  </body>
+</html>
