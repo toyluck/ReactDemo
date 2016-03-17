@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--suppress BadExpressionStatementJS -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<!--设置component 的属性-->
+    <div id="ex">fsaf</div>
+    <script type="text/babel">
+        var Hcom=React.createClass({
+//            所有的生命周期方法名 : function()
+            getInitialState:function(){
+               return  {opacity:1.0};
+            },
+
+//            当组件初始化渲染时 就被执行一次的方法
+//            在本方法中 可以获取相应的DOM节点
+//            想和其他JavaScript框架 集成,在本方法中可以执行setTimeout 或者 setInterval 来设置定时 或者发送 ajax请求
+                componentDidMount: function () {
+                this.timer=setInterval(function(){
+                    var opacity=this.state.opacity;
+                    opacity-=0.1;
+                    if (opacity<0.1){
+                        opacity=1;
+                    }
+                    this.setState({
+                        opacity: opacity
+                    });
+                }.bind(this), 100);
+            },
+
+            render:function() {
+                return (
+                        <p style={{opacity:this.state.opacity}}>
+                          Hello {this.props.name}
+                         </p>
+                );
+            }
+        });
+        ReactDOM.render(<Hcom name="World!" />,document.getElementById('ex'));
+    </script>
+</body>
+</html>
