@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+</head>
+<body>    <div id='ex' ></div>
+
+<script type="text/babel">
+    var AjaxR = React.createClass({
+        getInitialState  () {
+            return {
+                username: "",
+                user_url: ""
+            };
+        },
+
+//      这个使用 jQuery 的 ajax get 请求 github 的数据
+        componentDidMount () {
+            $.get(this.props.source, function (results) {
+                var result=results[0];
+                if (isMouted()){
+                    this.setState({
+                        username:result.owner.login,
+                        user_url:result.owner.html_url,
+                    })
+                }
+            }.bind(this));
+        },
+        render  (){
+            return (<div>
+                    {this.state.username}' 的 github 地址,点 <a href={this.state.user_url} >这里</a>进入
+                    </div>);
+        }
+    });
+
+    ReactDOM.render(<AjaxR  source="https://api.github.com/users/octocat/gists" />,document.getElementById('ex'));
+</script>
+</body>
+</html>

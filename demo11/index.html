@@ -9,6 +9,7 @@
   <body>
     <script type="text/babel">
 var UserGist = React.createClass({
+//  初始化 状态
   getInitialState: function() {
     return {
       username: '',
@@ -18,7 +19,7 @@ var UserGist = React.createClass({
 
   componentDidMount: function() {
     $.get(this.props.source, function(result) {
-      var lastGist = result[0];
+      var lastGist = result[2];
       if (this.isMounted()) {
         this.setState({
           username: lastGist.owner.login,

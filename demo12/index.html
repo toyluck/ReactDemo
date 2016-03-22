@@ -20,6 +20,8 @@ var RepoList = React.createClass({
 
 // 本方法可以获取DOM 对象,  这里的 promise  实际上是一个 ajax 请求   当请求 监听到 数据返回时 then 执行 下面的代码
 //  => 操作  相当于 var data =result;  然后把得到的数据 放入State值中
+
+// 两条命令,当render 时  如果有retrun 就终止.
   componentDidMount() {
     this.props.promise.then(
             result => this.setState({loading: false, data: result}),
@@ -50,9 +52,9 @@ var RepoList = React.createClass({
       </main>
     );
     }
-  }
+  } 
 });
-
+// 可以把一条 ajax 请求 传递给 propts 
 ReactDOM.render(
   <RepoList promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')} />,
   document.body

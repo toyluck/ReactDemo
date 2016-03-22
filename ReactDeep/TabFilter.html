@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter</title>
+	<script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="ex"></div>
+		<script type="text/babel">
+		var SearchBar=React.createClass({
+			hanlderListener(event){
+				this.props.handUserInput(this.refs.filterTextInput.value,
+					this.refs.filterIsStocked.checked);
+			},
+
+			render(){
+				return (<form>
+					<input type="text" placeholder="search..." onChange={this.hanlderListener} value={this.props.filterText} ref={'filterTextInput'}/>
+					<br/>
+					<input type="checkbox" value="Only show products" checked={this.props.isStocked} onChange={this.hanlderListener} ref={'filterIsStocked'}/>Only show products {this.props.filterText}
+					<br/>
+					</form>);
+			}
+		});
+		var ProductCategory=React.createClass({
+			render(){
+				var name=this.props.category
+						
+
+					return (<tr ><th colSpan='2'>{name}</th></tr>);
+			}
+		});
+		var ProductView=React.createClass({
+			render(){
+				var name=this.props.product.stocked?this.props.product.name:
+						(<span style={{color:'red'}}>{this.props.product.name}</span>)
+
+				return (<tr><th>{name}</th><th>{this.props.product.price}</th></tr>);		
+			}
+		});
+		var ProductsTab=React.createClass({
+
+					render(){
+						var lis=[];
+						var lastClass;
+						var filterText=this.props.filterText;
+						var isStocked=this.props.isStocked;
+						this.props.products.forEach(function(pro){
+							if (pro.name.indexOf(filterText)===-1 || (isStocked&&isStocked!=pro.stocked)){
+								return;		
+							}	
+
+							if (pro.category!=lastClass) {
+								//
+								lis.push(<ProductCategory  category={pro.category}  key={pro.category}/>);
+								}
+								lis.push(<ProductView product={pro} key={pro.name} />);
+
+								lastClass=pro.category;
+						});
+						return ( <table>
+							<thead>
+							<tr><th>NAME</th><th>PRICE</th></tr>
+							</thead>
+							<tbody>{lis}</tbody>
+							</table> );	
+					}	
+				});
+		var AllTab=React.createClass({
+getInitialState() {
+    return {
+          filterText:'',
+          isStocked:false
+    };
+},
+handUserInput(filterText,isStocked){
+	this.setState({
+		filterText:filterText,
+		isStocked:isStocked
+	})
+},
+			render(){
+				return (<div>
+					<SearchBar filterText={this.state.filterText}
+					 isStocked={this.state.isStocked}
+					 handUserInput={this.handUserInput}	/>
+					<ProductsTab products={this.props.products}
+							isStocked={this.state.isStocked} filterText={this.state.filterText}
+					/>
+					</div>);
+			}
+		})
+var PRODUCTS = [
+  {category: 'Sporting Goods', price: '$493.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+		ReactDOM.render(<AllTab products={PRODUCTS} />,document.getElementById('ex'));
+		</script>
+</body>
+</html>
